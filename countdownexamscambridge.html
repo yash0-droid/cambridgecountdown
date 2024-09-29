@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+        .countdown {
+            text-align: center;
+        }
+        .countdown h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .countdown p {
+            font-size: 32px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="countdown">
+        <h1>Countdown to 30 Sept 2024 12:00 PM</h1>
+        <p id="timer"></p>
+    </div>
+
+    <script>
+        // Set the target date and time
+        const targetDate = new Date('Sept 30, 2024 12:00:00').getTime();
+
+        // Update the countdown every 1 second
+        const countdownInterval = setInterval(() => {
+            // Get current time
+            const now = new Date().getTime();
+
+            // Calculate the remaining time
+            const timeRemaining = targetDate - now;
+
+            // Time calculations for days, hours, minutes, and seconds
+            const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+            // Display the result
+            document.getElementById("timer").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s `;
+
+            // If the countdown is finished
+            if (timeRemaining < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById("timer").innerHTML = "Countdown Finished";
+            }
+        }, 1000);
+    </script>
+
+</body>
+</html>
